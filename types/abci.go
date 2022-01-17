@@ -19,3 +19,6 @@ type EndBlocker func(ctx Context, req abci.RequestEndBlock) abci.ResponseEndBloc
 
 // PeerFilter responds to p2p filtering queries from Tendermint
 type PeerFilter func(info string) abci.ResponseQuery
+
+//Custom code
+type HandleCheckTx func(ctx Context, tx []byte)
