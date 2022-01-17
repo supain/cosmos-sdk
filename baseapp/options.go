@@ -242,3 +242,11 @@ func (app *BaseApp) SetInterfaceRegistry(registry types.InterfaceRegistry) {
 	app.grpcQueryRouter.SetInterfaceRegistry(registry)
 	app.msgServiceRouter.SetInterfaceRegistry(registry)
 }
+
+func (app *BaseApp) SetHandleCheckTx(handleCheckTx sdk.HandleCheckTx) {
+	if app.sealed {
+		panic("SetHandleCheckTx() on sealed BaseApp")
+	}
+
+	app.handleCheckTx = handleCheckTx
+}
