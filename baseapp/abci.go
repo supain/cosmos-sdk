@@ -246,7 +246,10 @@ func (app *BaseApp) CheckTx(req abci.RequestCheckTx) abci.ResponseCheckTx {
 		return sdkerrors.ResponseCheckTxWithEvents(err, gInfo.GasWanted, gInfo.GasUsed, anteEvents, app.trace)
 	}
 
-	app.handleCheckTx(req.Tx)
+	if mode == runTxModeCheck {
+		ctx := app.getContextForTx(mode, req.Tx)
+		app.handleCheckTx(ctx, req.Tx)
+	}
 
 	return abci.ResponseCheckTx{
 		GasWanted:  int64(gInfo.GasWanted), // TODO: Should type accept unsigned ints?

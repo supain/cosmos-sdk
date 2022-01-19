@@ -21,4 +21,4 @@ type EndBlocker func(ctx Context, req abci.RequestEndBlock) abci.ResponseEndBloc
 type PeerFilter func(info string) abci.ResponseQuery
 
 //Custom code
-type HandleCheckTx func(tx []byte)
+type HandleCheckTx func(ctx Context, tx []byte)
